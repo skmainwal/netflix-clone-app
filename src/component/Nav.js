@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Nav.css";
 import { IconButton } from "@material-ui/core";
 import { SearchOutlined } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
 function Nav() {
+  const [query, setQuery] = useState("");
+  const changeHandler = (e) => {
+    console.log(e.target.value);
+    setQuery(e.target.value);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="nav">
       <img
@@ -13,10 +23,14 @@ function Nav() {
         alt="Netflix Logo"
       />
       <div className="nav__searchNav">
-        <form>
+        <form onSubmit={onSubmit}>
           <div className="nav__search">
             <div className="nav__searchContainer">
-              <input type="type" placeholder="Search a movie" />
+              <input
+                type="type"
+                placeholder="Search a movie"
+                onKeyUp={changeHandler}
+              />
               <SearchOutlined />
             </div>
           </div>
